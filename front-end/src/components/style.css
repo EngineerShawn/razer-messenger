@@ -1,0 +1,53 @@
+
+
+/* styles.css */
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-room {
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.message-list {
+  margin-bottom: 20px;
+}
+
+.message {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.send-message-form {
+  display: flex;
+  margin-top: 20px;
+}
+
+.send-message-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.send-message-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.send-message-form button:hover {
+  background-color: #0056b3;
+}
