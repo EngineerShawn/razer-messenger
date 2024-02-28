@@ -1,47 +1,27 @@
-// front-end/src/App.js
+// frontend/src/App.js
 
 import React, { useState } from 'react';
-import Register from './components/Register';
 import Login from './components/Login';
+import Register from './components/Register';
 import ChatRoom from './components/ChatRoom';
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState('');
 
-  const handleRegister = async (userData) => {
+  const handleLogin = async (username, password) => {
     try {
-      const response = await fetch('/api/auth/register', {
+      const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        alert(data.message);
-      } else {
-        alert(data.message);
-      }
-    } catch (error) {
-      console.error('Error registering user:', error);
-    }
-  };
-
-  const handleLogin = async (userData) => {
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
       if (response.ok) {
         setToken(data.token);
-        setIsLoggedIn(true);
+        setLoggedIn(true);
       } else {
         alert(data.message);
       }
@@ -50,19 +30,38 @@ const App = () => {
     }
   };
 
+  const handleRegister = async (username, password) => {
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error registering:', error);
+    }
+  };
+
   return (
     <div className="App">
-      {!isLoggedIn ? (
+      {!loggedIn ? (
         <>
-          <Register onRegister={handleRegister} />
-          <Login onLogin={handleLogin} />
+          <Login handleLogin={handleLogin} />
+          <Register handleRegister={handleRegister} />
         </>
       ) : (
         <ChatRoom token={token} />
       )}
     </div>
   );
-};
+}
 
 export default App;
-

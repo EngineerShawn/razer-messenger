@@ -20,7 +20,7 @@ class Message {
       const { rows } = await pool.query(query);
       return rows;
     } catch (err) {
-      console.error('Error getting messages:', err);
+      console.error('Error fetching messages:', err);
     }
   }
 }
